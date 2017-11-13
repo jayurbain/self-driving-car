@@ -1,0 +1,27 @@
+
+
+
+
+ssh carnd@54.167.6.54
+carnd
+
+source activate carnd-term1
+
+conda install -c menpo opencv
+
+git clone https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project.git
+
+ls
+anaconda3  CarND-Term1-Starter-Kit  CarND-Traffic-Sign-Classifier-Project
+
+wget https://d17h27t6h515a5.cloudfront.net/topher/2017/February/5898cd6f_traffic-signs-data/traffic-signs-data.zip
+
+unzip traffic-signs-data.zip
+lsCODEOWNERS     test.p                         valid.p
+examples       Traffic_Sign_Classifier.ipynb  visualize_cnn.png
+README.md      traffic-signs-data.zip         writeup_template.md
+signnames.csv  train.p
+
+jupyter notebook
+
+http://54.167.6.54:8888/notebooks/Traffic_Sign_Classifier.ipynb
