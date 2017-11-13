@@ -170,7 +170,7 @@ Here are 8 German traffic signs from the web:
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. 
 
-![German traffic signs classificaitonaccuracy](wild_images_accuracy.png)
+![German traffic signs classificaitonaccuracy](images/wild_images_accuracy.png)
 
 The model predicted the correct class for 100% of the 8 traffic signs.
 
