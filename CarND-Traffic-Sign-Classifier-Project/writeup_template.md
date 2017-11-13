@@ -52,8 +52,6 @@ Here are sample images from distinct traffic sign classes in the dataset.
 
 ![alt text](images/init_images.png)
 
-<img src="images/init_images.png" style="width: 200px;"/>
-
 Here is a bar chart showing the distribution of traffic sign classes.
 
 ![alt text](images/image_histogram.png)
@@ -66,7 +64,7 @@ As a first preprocessing step, images were converted to grayscale from RGB. The 
 
 Here are examples of a traffic sign image before and after grayscaling (alternating rows).
 
-![alt text](image_rgb_gray.png)
+![alt text](images/image_rgb_gray.png)
 
 As a second preprocessing step, grayscale image data was normalized to zero-mean to reduce variance in lighting, and to improve learning efficiency, i.e., to converge to an optimal weighting quicker.
 
