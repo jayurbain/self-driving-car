@@ -68,22 +68,22 @@ These are the most relevant project files:
 
 ### nVidia Model
 
-<img src="img/model_nVidia_e3.png" width="300px">
+<img src="img/model_nVidia_e3.png" width="500px" style="display:block; margin-left: auto; margin-right: auto;">
 
 ### nVidia model_nVidia_e3 MSE
-<img src="img/model_nVidia_e3_mse.png" width="300px">
+<img src="img/model_nVidia_e3_mse.png" width="500px" style="display:block; margin-left: auto; margin-right: auto;">
 
 ### comma.ai Model
-<img src="img/model_commaAiModel_e3.png" width="300px">
+<img src="img/model_commaAiModel_e3.png" width="500px" style="display:block; margin-left: auto; margin-right: auto;">
 
 ### comma.ai Model MSE
-<img src="img/model_commaAiModel_e10_mse.png" width="300px">
+<img src="img/model_commaAiModel_e10_mse.png" width="500px" style="display:block; margin-left: auto; margin-right: auto;">
 
 ### comma.ai Prime Model - enhanced with 3 additional convolution layers, L2 regularization
-<img src="img/model_commaAiModelPrime_e5.png" width="300px">
+<img src="img/model_commaAiModelPrime_e5.png" width="500px" style="display:block; margin-left: auto; margin-right: auto;">
 
 ### comma.ai Prime Model MSE
-<img src="img/model_commaAiModelPrime_e5_mse.png" width="300px">
+<img src="img/model_commaAiModelPrime_e5_mse.png" width="500px" style="display:block; margin-left: auto; margin-right: auto;">
 
 ### Training data
 
@@ -91,7 +91,7 @@ One data set was provided by Udacity.
 
 Two additional datasets were collected using the simulator. One driving clockwise around the test track, and one driving counter-clockwise around the test track. The rationale is that if you only drive around the first track in a clock-wise direction, the data will be biased towards left turns. 
 
-<img src="img/gathering_training_data.png" width="300px">
+<img src="img/gathering_training_data.png" width="500px" style="display:block; margin-left: auto; margin-right: auto;">
 
 The additional data collected did not improve performance over training with the standard data set.
 
@@ -142,12 +142,6 @@ model.add(Cropping2D(cropping=((50,20), (0,0))))
 The test track includes long sections with very slight or no curvature, to balance the dataset, a historgram was generated for steering wheel angles. Images with close to 0 steering angle distribution were sub-samled to balance the training data.
 
 This approach was abandoned since it seemed to hurt performance. The car wobbled from side to side more. For reference, below is a plot of the histogram.
-
-** Steering wheel angle histogram **
-<img src="img/steering_wheel_histo.png" width="300px">
-
-**Image after preprocessing with steering measurement**
-<img src="img/drive_1.png" width="300px"><br>
 
 ### Outputting Training and Validation Loss Metrics
 In Keras, the model.fit() and model.fit_generator() methods have a verbose parameter that tells Keras to output loss metrics as the model trains. The verbose parameter can optionally be set to verbose = 1 or verbose = 2.
