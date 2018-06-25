@@ -1,0 +1,48 @@
+############################################
+
+DeepSequenceLearningIntro project:
+
+I've checked the activity training data into the git hub repository. You can also use the data link
+at the top of the notebook
+
+If you have not already cloned the directory:
+git clone https://github.com/jayurbain/DeepSequenceLearningIntro.git
+
+If you've already performed a git clone, perform a git pull.
+
+Make sure you are using the correct environment:
+conda env create -f environment.yml
+
+Run the following jupyter notebook. There are several models to try.
+human_activity_recognition-LSTM-Keras.ipynb
+
+############################################
+
+CarND-Behavioral-Cloning-P3 project:
+
+If you have not already cloned the directory:
+git clone https://github.com/jayurbain/CarND-Behavioral-Cloning-P3.git
+
+If you've already performed a git clone, perform a git pull.
+
+# Envronment setup: 
+# install conda or mini-conda: https://conda.io/miniconda.html
+$ conda env create -f environment.yml
+$ source activate carnd-term1
+
+# cd to 'CarND-Behavioral-Cloning-P3' root directory
+
+# Building a model
+# executed within 'CarND-Behavioral-Cloning-P3' root directory
+# --data - subdirectory of images for training
+# --h5modelout - learned output model .h5
+# --model - machine learning model name - see top of model.py source for different models to select
+
+python model.py --data data --h5modeloutput model_commaAiModelPrime_e06252018.h5 --model commaAiModelPrime
+
+# Testing with the simulator
+Step 1)
+python drive.py model_commaAiModelPrime_e06252018.h5 
+
+2) Run the Udacity car simulator (I can do this for you). I think this is it, but I'm rusty.
+https://github.com/udacity/self-driving-car-sim.git
