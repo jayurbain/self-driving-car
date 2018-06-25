@@ -21,6 +21,11 @@ import sklearn
 
 import matplotlib.pyplot as plt
 
+import sys
+import time
+import argparse
+import os
+
 # basic net
 def getModel(model="nVidiaModel"):
     if model == "basicModel":
@@ -241,50 +246,75 @@ def generator(samples, batch_size=32):
             outputs = np.array(angles)
             yield sklearn.utils.shuffle(inputs, outputs)
 
+        import sys
 
-# Reading images locations.
-centerPaths, leftPaths, rightPaths, measurements = getImages('data')
-imagePaths, measurements = combineCenterLeftRightImages(centerPaths, leftPaths, rightPaths, measurements, 0.2)
-print('Total Images: {}'.format( len(imagePaths)))
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--data', type=str, default='')
+    parser.add_argument('--h5modeloutput', type=str, default='')
+    parser.add_argument('--model', type=str, default='')
+    return parser.parse_args()
 
-# Splitting samples and creating generators.
-from sklearn.model_selection import train_test_split
-samples = list(zip(imagePaths, measurements))
-train_samples, validation_samples = train_test_split(samples, test_size=0.2)
+def main():
+    args = parse_args()
+    data = args.data
+    h5modeloutput = args.h5modeloutput
+    modelname = args.model
 
-print('Train samples: {}'.format(len(train_samples)))
-print('Validation samples: {}'.format(len(validation_samples)))
+    print(args)
 
-train_generator = generator(train_samples, batch_size=32)
-validation_generator = generator(validation_samples, batch_size=32)
+    # Reading images locations.
+    #centerPaths, leftPaths, rightPaths, measurements = getImages('data')
+    centerPaths, leftPaths, rightPaths, measurements = getImages(data)
+    imagePaths, measurements = combineCenterLeftRightImages(centerPaths, leftPaths, rightPaths, measurements, 0.2)
+    print('Total Images: {}'.format(len(imagePaths)))
 
-# Model creation
-# model = getModel(model="nVidiaModel")
-#model = getModel(model="commaAiModel")
-#model = getModel(model="nVidiaModelRegularization")
-model = getModel(model="commaAiModelPrime")
+    # Splitting samples and creating generators.
+    from sklearn.model_selection import train_test_split
 
-# Train the model
-history_object = model.fit_generator(train_generator, samples_per_epoch= \
-                 len(train_samples), validation_data=validation_generator, \
-                 nb_val_samples=len(validation_samples), nb_epoch=5, verbose=1)
+    samples = list(zip(imagePaths, measurements))
+    train_samples, validation_samples = train_test_split(samples, test_size=0.2)
 
-#model.save('model_nVidia.h5')
-#model.save('model_commaAiModel_e10.h5')
-# model.save('nVidiaModelRegularization_e5.h5')
-#model.save('model_commaAiModelPrime_e20.h5')
-model.save('model_commaAiModelPrime_e5.h5')
+    print('Train samples: {}'.format(len(train_samples)))
+    print('Validation samples: {}'.format(len(validation_samples)))
 
-print(history_object.history.keys())
-print('Loss')
-print(history_object.history['loss'])
-print('Validation Loss')
-print(history_object.history['val_loss'])
+    train_generator = generator(train_samples, batch_size=32)
+    validation_generator = generator(validation_samples, batch_size=32)
 
-plt.plot(history_object.history['loss'])
-plt.plot(history_object.history['val_loss'])
-plt.title('model mean squared error loss')
-plt.ylabel('mean squared error loss')
-plt.xlabel('epoch')
-plt.legend(['training set', 'validation set'], loc='upper right')
-plt.show()
+    # Model creation
+    # model = getModel(model="nVidiaModel")
+    # model = getModel(model="commaAiModel")
+    # model = getModel(model="nVidiaModelRegularization")
+    # model = getModel(model="commaAiModelPrime")
+    model = getModel(model=modelname)
+
+    # Train the model
+    history_object = model.fit_generator(train_generator, samples_per_epoch= \
+        len(train_samples), validation_data=validation_generator, \
+                                         nb_val_samples=len(validation_samples), nb_epoch=5, verbose=1)
+
+    # model.save('model_nVidia.h5')
+    # model.save('model_commaAiModel_e10.h5')
+    # model.save('nVidiaModelRegularization_e5.h5')
+    # model.save('model_commaAiModelPrime_e20.h5')
+    # model.save('model_commaAiModelPrime_e5.h5')
+    model.save(h5modeloutput)
+
+    print(history_object.history.keys())
+    print('Loss')
+    print(history_object.history['loss'])
+    print('Validation Loss')
+    print(history_object.history['val_loss'])
+
+    plt.plot(history_object.history['loss'])
+    plt.plot(history_object.history['val_loss'])
+    plt.title('model mean squared error loss')
+    plt.ylabel('mean squared error loss')
+    plt.xlabel('epoch')
+    plt.legend(['training set', 'validation set'], loc='upper right')
+    plt.show()
+
+if __name__ == "__main__":
+    main()
+
+
